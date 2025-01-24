@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "textual-study"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = "~=3.11"
+keywords = []
+authors = [
+  { name = "Lee Chung Gak", email = "void@some.where" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+  "textual-dev",
+]
+
+[project.urls]
+Documentation = "https://github.com/Lee Chung Gak/textual-study#readme"
+Issues = "https://github.com/Lee Chung Gak/textual-study/issues"
+Source = "https://github.com/Lee Chung Gak/textual-study"
+
+[project.scripts]
+textual-study = "textual_study.cli:textual_study"
+
+[tool.hatch.version]
+path = "src/textual_study/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/textual_study tests}"
+
+[tool.coverage.run]
+source_pkgs = ["textual_study", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/textual_study/__about__.py",
+]
+
+[tool.coverage.paths]
+textual_study = ["src/textual_study", "*/textual-study/src/textual_study"]
+tests = ["tests", "*/textual-study/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
